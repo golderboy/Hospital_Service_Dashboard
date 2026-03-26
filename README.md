@@ -1,29 +1,64 @@
-# Hospital Service Dashboard
+# SobmoeiHospital Service Dashboard
 
-เว็บ Dashboard สำหรับสรุปข้อมูลบริการโรงพยาบาลจาก HOSxP/HOSxP V4 โดยใช้ PHP 7.4, Apache และ MariaDB/MySQL
+ระบบเว็บแดชบอร์ดสำหรับสรุปข้อมูลบริการโรงพยาบาล ใช้ติดตามภาพรวมผู้รับบริการ ตัวชี้วัดสำคัญ โรคที่พบบ่อย ข้อมูลประชากร และงานวิเคราะห์การเคลมในหน้าเดียว
 
-## โครงสร้างหลัก
-- `index.php` หน้า dashboard หลัก
-- `api/` endpoint สำหรับ AJAX / export
-- `app/` business logic, config และ support classes
-- `sql/01_hos_dashboard.sql` schema + stored procedure + event
-- `sql/02_VERIFY.sql` ชุดคำสั่งตรวจสอบหลังติดตั้ง
-- `storage/` cache และ log runtime
-- `assets/vendor/` library ที่ commit ไปพร้อม source code
+### ภาพรวม Dashboard
+![Dashboard Overview](doc/images/001.png)
 
-## Quick start
-1. clone หรือแตกไฟล์ project ลง web root
-2. copy `.env.example` เป็น `.env`
-3. แก้ค่าฐานข้อมูลและ `APP_BASE_URL`
-4. import `sql/01_hos_dashboard.sql` ไปยังฐาน `hos_dashboard`
-5. รัน `CALL sp_rebuild_last_5_years();` ครั้งแรก
-6. ตรวจสิทธิ์เขียน `storage/cache`, `storage/logs`, `assets/tmp`
-7. เปิดเว็บและตรวจ `sql/02_VERIFY.sql`
+### ตาราง Top 10 และข้อมูลวิเคราะห์
+![Dashboard Top 10](doc/images/002.png)
 
-## GitHub push ครั้งแรก
-ใช้ `scripts/git_push_main.sh` หรือรันคำสั่ง git เองตามคู่มือ
+### หน้าวิเคราะห์การเคลม
+![Claim Analysis](doc/images/003.png)
 
-## หมายเหตุ
-- ต้องไม่ commit `.env` จริงขึ้น GitHub
-- แนะนำให้ user ที่เชื่อม `hosxp` เป็น read-only
-- ควรเปิด HTTPS ใน production
+> README นี้เป็นฉบับย่อสำหรับหน้า GitHub  
+> คู่มือฉบับเต็มอยู่ในโฟลเดอร์ `/doc`
+
+---
+
+## วัตถุประสงค์
+
+โครงการนี้พัฒนาขึ้นเพื่อให้โรงพยาบาลสามารถดูข้อมูลสำคัญจากระบบบริการได้รวดเร็ว อ่านง่าย และใช้ประกอบการตัดสินใจได้จริง โดยมีเป้าหมายหลักดังนี้
+
+- สรุปภาพรวมบริการ OPD / IPD / ER ในหน้าเดียว
+- ลดเวลาการรวบรวมข้อมูลแบบ manual
+- ช่วยติดตามสิทธิการรักษา การยืนยันตัวตน การนัด และการส่งต่อ
+- แสดงโรคที่พบบ่อยและข้อมูลเชิงวิเคราะห์ในรูปแบบที่เข้าใจง่าย
+- วางโครงสร้างระบบให้ดูแลและพัฒนาต่อได้
+
+---
+
+## ความสามารถหลักของระบบ
+
+- Dashboard สรุปภาพรวมบริการรายวันและตามช่วงวันที่
+- ตัวกรองข้อมูลตามวันที่ คลินิก กลุ่มสิทธิ และประเภทบริการ
+- KPI Cards สำหรับตัวเลขสำคัญ
+- ตาราง Top 10 โรค OPD / IPD / โรคเรื้อรัง
+- ตารางวิเคราะห์ค่าใช้จ่ายและการยืนยันตัวตน
+- หน้าวิเคราะห์การเคลมแบบสรุป
+- Export ข้อมูลเป็น CSV / Excel
+
+---
+
+## เทคโนโลยีที่ใช้
+
+- PHP 7.4
+- Apache + mod_php
+- MariaDB / MySQL
+- Bootstrap
+- jQuery / AJAX
+- Highcharts JS
+
+---
+
+## ภาพตัวอย่างระบบ
+
+---
+
+## คู่มือการติดตั้งอย่างย่อ
+
+### 1) Clone โปรเจกต์จาก GitHub
+
+```bash
+git clone https://github.com/golderboy/Hospital_Service_Dashboard.git
+cd Hospital_Service_Dashboard
