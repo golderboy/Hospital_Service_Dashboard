@@ -95,6 +95,11 @@ ON `hos_dashboard`.* TO 'HOS_DASHBOARD_ADMIN_USER'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
+### ภาพรวม DATA FLOW
+![database_context](https://github.com/golderboy/Hospital_Service_Dashboard/blob/main/docs/004.png)
+![relational_model](https://github.com/golderboy/Hospital_Service_Dashboard/blob/main/docs/005.png)
+![data_flow](https://github.com/golderboy/Hospital_Service_Dashboard/blob/main/docs/006.png)
+
 ### 4) ตั้งค่า Apache
 ใช้งานบนดีบน Apache + mod_php 7.4 บน Linux
 ตรวจสอบให้เครื่องมีอย่างน้อย
