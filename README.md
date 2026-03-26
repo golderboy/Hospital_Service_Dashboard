@@ -3,13 +3,13 @@
 ระบบเว็บแดชบอร์ดสำหรับสรุปข้อมูลบริการโรงพยาบาล ใช้ติดตามภาพรวมผู้รับบริการ ตัวชี้วัดสำคัญ โรคที่พบบ่อย ข้อมูลประชากร และงานวิเคราะห์การเคลมในหน้าเดียว
 
 ### ภาพรวม Dashboard
-![Dashboard Overview](doc/images/001.png)
+![Dashboard Overview](doc/001.png)
 
 ### ตาราง Top 10 และข้อมูลวิเคราะห์
-![Dashboard Top 10](doc/images/002.png)
+![Dashboard Top 10](doc/002.png)
 
 ### หน้าวิเคราะห์การเคลม
-![Claim Analysis](doc/images/003.png)
+![Claim Analysis](doc/003.png)
 
 > README นี้เป็นฉบับย่อสำหรับหน้า GitHub  
 > คู่มือฉบับเต็มอยู่ในโฟลเดอร์ `/doc`
