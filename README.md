@@ -1,6 +1,7 @@
 # SobmoeiHospital Service Dashboard
 
 ระบบเว็บแดชบอร์ดสำหรับสรุปข้อมูลบริการโรงพยาบาล ใช้ติดตามภาพรวมผู้รับบริการ ตัวชี้วัดสำคัญ โรคที่พบบ่อย ข้อมูลประชากร และงานวิเคราะห์การเคลมในหน้าเดียว
+##### หมายเหตุ1 พัฒนาบนฐาน HOSXP XE หากใน HOSXP V3 อาจต้องแก้ไข 01_hos_dashboard.sql เพิ่ม
 
 ### ภาพรวม Dashboard
 ![Dashboard Overview](https://github.com/golderboy/Hospital_Service_Dashboard/blob/main/docs/001.png)
@@ -74,12 +75,31 @@ cp .env.example .env
 - สร้างฐานข้อมูลสำหรับระบบ Dashboard
 - Import โครงสร้างฐานข้อมูล/ไฟล์ SQL ที่จำเป็นตามเอกสารใน /doc
 - ตั้งค่าการเชื่อมต่อฐานข้อมูล HOSxP และฐาน Dashboard ให้ถูกต้อง
+##### หมายเหตุ1 กรุณาทดสอบในฐานสำรอง Hosxp
+##### หมายเหตุ2 ใน 01_hos_dashboard.sql เปลี่ยน hosxp.* เป็น ชื่อฐานข้อมูลท่าน.* และ hos_dashboard ในอยู่ในฐานเดียวกับ Hosxp
+##### หมายเหตุ3 กำหนดสิทธิ ให้เข้าถึงฐานข้อมูล Hosxp แค่ SELECT
+
+```bash
+-- แก้ชื่อ user และรหัสผ่านเองก่อนรัน
+
+CREATE USER IF NOT EXISTS 'HOS_DASHBOARD_WEB_USER'@'localhost'
+IDENTIFIED BY 'HOS_DASHBOARD_WEB_PASSWORD';
+GRANT SELECT ON `hos_dashboard`.* TO 'HOS_DASHBOARD_WEB_USER'@'localhost';
+
+CREATE USER IF NOT EXISTS 'HOS_DASHBOARD_ADMIN_USER'@'localhost'
+IDENTIFIED BY 'HOS_DASHBOARD_ADMIN_PASSWORD';
+GRANT SELECT ON `hosxp`.* TO 'HOS_DASHBOARD_ADMIN_USER'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, INDEX, DROP, CREATE VIEW, SHOW VIEW, EVENT, EXECUTE
+ON `hos_dashboard`.* TO 'HOS_DASHBOARD_ADMIN_USER'@'localhost';
+
+FLUSH PRIVILEGES;
+```
 
 ### 4) ตั้งค่า Apache
 ใช้งานบนดีบน Apache + mod_php 7.4 บน Linux
 ตรวจสอบให้เครื่องมีอย่างน้อย
 - Apache
-- PHP 7.4
+- PHP 7.4+
 - MariaDB / MySQL extension สำหรับ PHP
 - mod_rewrite
 - สิทธิ์อ่านไฟล์โปรเจกต์ครบถ้วน
