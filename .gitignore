@@ -1,0 +1,30 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Runtime storage
+/storage/cache/*
+!/storage/cache/.gitignore
+!/storage/cache/.gitkeep
+/storage/logs/*
+!/storage/logs/.gitignore
+/assets/tmp/*
+!/assets/tmp/.gitignore
+
+# Optional local demo / temp / exports
+*.log
+*.tmp
+*.bak
+*.swp
+*.zip
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Dependency managers (root only)
+/vendor/
+/node_modules/

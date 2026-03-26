@@ -1,0 +1,28 @@
+Options -Indexes -MultiViews
+ServerSignature Off
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Block dot-files except ACME/Let's Encrypt path
+    RewriteRule (^|/)\.(?!well-known/) - [F,L]
+
+    # Block internal directories from direct access
+    RewriteRule ^(app|storage|sql|docs|tests|scripts|\.git)/ - [F,L,NC]
+
+    # Block sensitive filenames
+    RewriteRule ^(\.env|env\.txt|composer\.(json|lock)|phpunit\.xml|README(\.md|\.txt)?)$ - [F,L,NC]
+</IfModule>
+
+<FilesMatch "(?i)^(\.env|env\.txt|composer\.(json|lock)|phpunit\.xml|README(\.md|\.txt)?|.*\.(sql|log|sh|bak|dist))$">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+    Header always unset X-Powered-By
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    Header always set Cross-Origin-Resource-Policy "same-origin"
+</IfModule>
